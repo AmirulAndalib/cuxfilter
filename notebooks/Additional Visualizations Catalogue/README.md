@@ -18,6 +18,8 @@ Run the RAPIDS Viz Catalog notebook to interactively explore the below viz libra
 
 ## Generate Static webpage from Notebook
 **Note:** code for the apps are in the `/examples/` folder.
+Be sure to replace `Charts().view()` with below to pre-compute the data:
+`Charts().view().embed(json=True, load_path="./state/", save_path="./state/", json_prefix="testJSON")`
 
 ```bash
 conda create -n viz-catalogue-env -c rapidsai -c conda-forge -c nvidia \
