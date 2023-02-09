@@ -1,1 +1,0 @@
-sed 's@"Charts().view()"@"Charts().view().embed(json=True, load_path=\\"./state/\\", save_path=\\"./state/\\", json_prefix=\\"testJSON\\")"@' RAPIDS\ Viz\ Catalog.ipynb > RAPIDS\ Viz\ Catalog-static.ipynb
