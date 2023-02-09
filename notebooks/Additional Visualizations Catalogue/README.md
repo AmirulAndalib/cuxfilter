@@ -16,10 +16,13 @@ Run the RAPIDS Viz Catalog notebook to interactively explore the below viz libra
 - PyDeck: Python bindings for interactive spatial visualizations with webGL powered deck.gl, optimized for a Jupyter environment.
 - node RAPIDS: RAPIDS bindings in nodeJS, a high performance JS/TypeScript visualization alternative to using Python.
 
-## Generate Static webpage from Notebook
+## Generate Static Charts from Notebook for Jekyll
 **Note:** code for the apps are in the `/examples/` folder.
-Be sure to replace `Charts().view()` with below to pre-compute the data:
-`Charts().view().embed(json=True, load_path="./state/", save_path="./state/", json_prefix="testJSON")`
+
+Be sure to replace `Charts().view()` with below to pre-compute and export each chart:
+`Charts().view().save('chart-name.html', embed=True, embed_json=True, save_path="./data/", json_prefix="chart-JSON")`
+
+Then run nbconvert to generate the wrapper page and manually add each exported chart:
 
 ```bash
 conda create -n viz-catalogue-env -c rapidsai -c conda-forge -c nvidia \
@@ -27,5 +30,6 @@ conda create -n viz-catalogue-env -c rapidsai -c conda-forge -c nvidia \
 
 conda activate viz-catalogue-env
 
-rm -rf state/* && jupyter nbconvert --to html RAPIDS\ Viz\ Catalog.ipynb --execute --output index.html
+# export page
+jupyter nbconvert --to markdown RAPIDS\ Viz\ Catalog.ipynb --execute --output viz.md
 ```

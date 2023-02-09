@@ -29,7 +29,7 @@ class Charts(PlotBase):
         df = df.to_pandas() if type(df) == cudf.DataFrame else df
 
         # generate bokeh bar chart
-        p = figure(height=500, width=700, title="Bokeh Bar Chart")
+        p = figure(width=500, height=400, title="Bar Plot")
         p.vbar(source=df, x="value", top="freq", width=0.9)
         return pn.pane.Bokeh(p)
 
@@ -40,8 +40,6 @@ class Charts(PlotBase):
         from bokeh.transform import factor_cmap
         from examples.dataset import generate_random_points
 
-        # pn.extension()
-
         df = generate_random_points(nodes=self.n, dtype=self.dtype)
 
         # Bokeh does not take cuDF directly, convert cudf dataframe to pandas df
@@ -51,15 +49,12 @@ class Charts(PlotBase):
         df["cluster_s"] = df.cluster.apply(lambda i: str(i))
 
         # Create scatter chart
-        graph = figure(title="Bokeh Scatter Graph", height=500, width=700)
+        graph = figure(title="Scatter Plot", width=500, height=400)
         graph.scatter(
-            source=df,
-            x="x",
-            y="y",
+            source=df, x="x", y="y", color="black",
             fill_color=factor_cmap(
                 "cluster_s", palette=Spectral10, factors=factor_s
-            ),
-            color="black",
+            )
         )
         return pn.pane.Bokeh(graph)
 
@@ -70,8 +65,6 @@ class Charts(PlotBase):
         from bokeh.transform import factor_cmap
         from examples.dataset import generate_random_points
 
-        # pn.extension()
-
         df = generate_random_points(nodes=self.n, dtype=self.dtype)
 
         # Bokeh does not take cuDF directly, convert cudf dataframe to pandas df
@@ -79,11 +72,7 @@ class Charts(PlotBase):
 
         # Create and combine multiple line charts
         p = figure(
-            title="Line",
-            x_axis_label="x",
-            y_axis_label="y",
-            height=500,
-            width=700,
+            title="Line Plot", x_axis_label="x", y_axis_label="y", width=500, height=400
         )
         p.line(x=df["vertex"], y=df["x"], line_width=2, color="red")
         p.line(x=df["vertex"], y=df["y"], line_width=2, color="blue")

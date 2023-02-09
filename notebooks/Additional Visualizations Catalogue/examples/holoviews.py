@@ -27,7 +27,7 @@ class Charts(PlotBase):
 
         # generate holoviews points chart using {dtype} DataFrame
         return hv.Bars(df, kdims="value", vdims="freq").opts(
-            height=500, width=700
+             title="Bar Plot", width=500, height=400
         )
 
     def points_plot(self):
@@ -39,7 +39,7 @@ class Charts(PlotBase):
 
         # generate holoviews points chart using {dtype} DataFrame
         return hv.Points(df, kdims=["x", "y"], vdims="cluster").opts(
-            color="cluster", height=500, width=700
+            color="cluster", title="Scatter Plot", width=500, height=400
         )
 
     def line_plot(self):
@@ -56,5 +56,5 @@ class Charts(PlotBase):
         line_y = hv.Curve(df, kdims="vertex", vdims="y").opts(color="blue")
         # overlay line charts
         return (line_x * line_y).opts(
-            ylabel="value", title="line Plot", width=700, height=500
+            ylabel="value", title="Line Plot", width=500, height=500
         )

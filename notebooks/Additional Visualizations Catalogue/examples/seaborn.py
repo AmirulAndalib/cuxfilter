@@ -28,7 +28,7 @@ class Charts(PlotBase):
         df = df.to_pandas() if type(df) == cudf.DataFrame else df
 
         # generate seaborn bar chart
-        fig = Figure(figsize=(12, 6))
+        fig = Figure(figsize=(6, 4))
         ax = fig.add_subplot(111)
         sns.barplot(df, x="value", y="freq", ax=ax, color="blue")
         return pn.panel(fig)
@@ -45,7 +45,7 @@ class Charts(PlotBase):
         df = df.to_pandas() if type(df) == cudf.DataFrame else df
 
         # Create scatter chart
-        fig = Figure(figsize=(12, 6))
+        fig = Figure(figsize=(6, 4))
         ax = fig.add_subplot(111)
         sns.scatterplot(df, x="x", y="y", hue="cluster", ax=ax)
         return pn.panel(fig)
@@ -64,7 +64,7 @@ class Charts(PlotBase):
         df = df.to_pandas() if type(df) == cudf.DataFrame else df
 
         # Create and combine multiple line charts
-        fig = Figure(figsize=(12, 6))
+        fig = Figure(figsize=(6, 4))
         ax = fig.add_subplot(111)
         sns.lineplot(df, x="x", y="y", ax=ax)
         return pn.panel(fig)

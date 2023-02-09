@@ -27,14 +27,11 @@ class PlotBase(param.Parameterized):
     @pn.depends("chart", "dtype", "n")
     def view(self):
         # return self.plot
-        return pn.Row(
-            pn.Column(
-                self.param,
-                self.plot_code,
-            ),
-            self.plot,
+        return pn.Column(
+            pn.Row("**Chart Options**"),
+            pn.Row(self.param.chart, self.param.dtype, self.param.n, sizing_mode='stretch_width'),
+            pn.Row(self.plot_code, self.plot)
         )
-
 
 def get_code(fn, dtype, n):
     result = (
@@ -82,4 +79,4 @@ def get_code(fn, dtype, n):
         .replace("# pn.extension", "pn.extension")
     )
 
-    return pn.pane.Markdown("```python \n" + result + "```", width=800)
+    return pn.pane.Markdown("```python \n" + result + "```", width=500)
